@@ -1,0 +1,25 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+
+/* Additional styles */
+@import 'additional-styles/utility-patterns.css';
+@import 'additional-styles/theme.css';
+
+@import 'tailwindcss/utilities';
+
+/* Additional Tailwind directives: https://tailwindcss.com/docs/functions-and-directives/#responsive */
+@layer utilities {
+    .rtl {
+        direction: rtl;
+    }
+
+    .form-input,
+    .form-textarea,
+    .form-multiselect,
+    .form-select,
+    .form-checkbox,
+    .form-radio {
+        @apply border focus:border-purple-500 ring-0 focus:ring-0;
+    }
+}
+
