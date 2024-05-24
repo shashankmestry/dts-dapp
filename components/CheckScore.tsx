@@ -15,7 +15,7 @@ const CheckScore = () => {
                 {
                     isConnected && address ? (<>
                         <h2 className="text-xl mb-4">Your Wallet is connected</h2>
-                        <FetchScore address={address} />
+                        <FetchScore connectedAddress={address} />
                     </>) : (<>
                         <h2 className="text-xl mb-4">Connect Wallet to check your DTS</h2>
                         <Button className="text-base" onClick={() => open()}>Connect Wallet</Button>

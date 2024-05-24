@@ -6,8 +6,8 @@ export interface ButtonProps
   extends LinkProps {
   variant?: string,
   children: ReactNode,
-  className: string,
-  showArrow: boolean
+  className?: string,
+  showArrow?: boolean
 }
 
 const variants: {[key:string]: string} = {

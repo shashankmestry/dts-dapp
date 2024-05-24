@@ -54,7 +54,7 @@ const ConnectTwitter = ({ currentStep, address, connectedHandle, setConnectedHan
                 ) : (<>
                     {
                         connectedHandle != "" && connectedHandle == sessionHandle ? (<>
-                            <p>The Account is already connected</p>
+                            <p>The Account is already connected with @{sessionHandle}</p>
                         </>) : (<>
                             <p className="mb-2 flex gap-2 items-center">Do you want to verify <Link href={`https://twitter.com/${sessionHandle}`} target="_blank" className="flex items-center bg-black/25 px-1 transition-all hover:bg-black/50">@{sessionHandle}</Link> for </p>
                             <p className="mb-4">{address} ?</p>
@@ -67,7 +67,7 @@ const ConnectTwitter = ({ currentStep, address, connectedHandle, setConnectedHan
                 }
                 <div className="h-8"></div>
                 <div className="flex gap-4">
-                    { connectedHandle != "" || sessionHandle != "" && <Button onClick={() => handleNext()}>Continue</Button> }
+                    { (connectedHandle != "" || sessionHandle != "") && <Button onClick={() => handleNext()}>Continue</Button> }
                     <Button variant="secondary" onClick={() => setCurrentStep("1")}>Back</Button>
                 </div>
             </Card>) : (<div>

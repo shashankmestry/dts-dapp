@@ -14,7 +14,7 @@ interface MsgProps {
 const Message = ({ message, setMessage }: { message: MsgProps, setMessage: Function }) => {
     const closeError = () => {
         setMessage({
-            type: "",
+            type: message.type,
             show: false,
             title: message.title,
             description: message.description
