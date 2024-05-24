@@ -201,22 +201,35 @@ const getNFTCount = async (alchemy: Alchemy, address: string) => {
     return nfts.totalCount;
 }
 
+// export const getTwitterHandle = async (address: string) => {
+//     try {
+//         const res = await fetch(`${process.env.HOST}/api/twitter/handle/?address=${address}`, {
+//             method: 'GET',
+//             headers: {
+//                 'Content-Type': 'application/json',
+//             },
+//         });
+//         const data = await res.json();
+//         console.log(data)
+//         return data.handle;
+//     } catch (error) {
+//         console.log(error)
+//         return "";
+//     }
+// }
+
 export const getTwitterHandle = async (address: string) => {
     try {
-        const res = await fetch(`${process.env.HOST}/api/twitter/handle/?address=${address}`, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        });
-        const data = await res.json();
-        console.log(data)
-        return data.handle;
+        const account = await AccountsModel.findOne({ address });
+        if(account && account.twitterHandle) {
+            return account.twitterHandle;
+        } else {
+            return ""
+        }
     } catch (error) {
-        console.log(error)
-        return "";
+        return ""
     }
-}
+} 
 
 /**
  * Checks if the given string is an address

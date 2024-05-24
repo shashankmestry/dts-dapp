@@ -37,10 +37,12 @@ const Header = () => {
                     </nav>
 
                     {/* Desktop sign in links */}
-                    <ul className="flex-1 flex justify-end items-center">
+                    <ul className="flex-1 flex gap-4 justify-end items-center">
                         <li>
-                            {/* <Link className="font-medium text-sm text-slate-300 hover:text-white whitespace-nowrap transition duration-150 ease-in-out" href="/connect">Connect</Link> */}
-                            <ButtonLink href="/connect" variant='transparent'>Connect</ButtonLink>
+                            <Link className="font-medium text-sm text-slate-300 hover:text-white whitespace-nowrap transition duration-150 ease-in-out" href="/check">Check DTS</Link>
+                        </li>
+                        <li>
+                            <Link className="font-medium text-sm text-slate-300 hover:text-white whitespace-nowrap transition duration-150 ease-in-out" href="/connect">Connect X</Link>
                         </li>
                         {/* <li className="ml-6">
                             <Link className="btn-sm text-slate-300 hover:text-white transition duration-150 ease-in-out w-full group [background:linear-gradient(theme(colors.slate.900),_theme(colors.slate.900))_padding-box,_conic-gradient(theme(colors.slate.400),_theme(colors.slate.700)_25%,_theme(colors.slate.700)_75%,_theme(colors.slate.400)_100%)_border-box] relative before:absolute before:inset-0 before:bg-slate-800/30 before:rounded-full before:pointer-events-none" href="/signup">

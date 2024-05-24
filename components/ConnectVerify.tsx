@@ -3,6 +3,7 @@ import { Dispatch, SetStateAction, useState } from "react"
 import Button from "./ui/Button"
 import Card from "./ui/Card"
 import Message from "./ui/Message"
+import ButtonLink from "./ui/ButtonLink"
 
 interface ConnectVerifyProps {
     address: string,
@@ -71,7 +72,10 @@ const ConnectVerify = ({ address, handle, setCurrentStep, loadConnectedHandle }:
                     }
                     <Button variant="secondary" onClick={() => setCurrentStep("2")}>Back</Button>
                 </div> :
-                <p className="text-green-800 bg-green-200 rounded-lg px-4 py-2">Your Address has been verified against X Account!</p>
+                <>
+                    <p className="text-green-800 bg-green-200 rounded-lg px-4 py-2 mb-5">Your Address has been verified against X Account!</p>
+                    <ButtonLink href="/">Check DTS</ButtonLink>
+                </> 
             }
             <Message message={message} setMessage={setMessage} />
         </Card>

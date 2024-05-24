@@ -1,3 +1,5 @@
+"use client";
+
 import { FormEvent, useCallback, useEffect, useState } from "react"
 import Button from "./ui/Button"
 import { ITrustScore } from "@/services/score.service"
@@ -5,7 +7,7 @@ import { isAddress } from "ethers"
 import Message from "./ui/Message"
 import ScoreCard from "./ScoreCard"
 
-const FetchScore = ({ connectedAddress }: { connectedAddress?: string | null }) => {
+const FetchScore = () => {
     const [address, setAddress] = useState("")
     const [score, setScore] = useState<ITrustScore | null>(null)
     const [checking, setChecking] = useState(false)
@@ -85,32 +87,12 @@ const FetchScore = ({ connectedAddress }: { connectedAddress?: string | null }) 
         }
     }
 
-    const loadScore = useCallback(async (address: string) => {
-        const data = await fetchScore(address);
-        if (data) {
-            setScore(data)
-        } else {
-            setScore(null)
-        }
-    }, [])
-
-    useEffect(() => {
-        if (isAddress(connectedAddress)) {
-            setAddress(connectedAddress)
-            loadScore(connectedAddress)
-        } else {
-            setScore(null)
-        }
-    }, [connectedAddress, loadScore])
-
     return (
         <>
-            <form className="inline-flex max-w-xl w-full" onSubmit={getScore}>
+            <form className="max-w-xl w-full mx-auto" onSubmit={getScore}>
                 <div className="w-full flex flex-col sm:flex-row justify-center max-w-xs mx-auto sm:max-w-none">
-                    <input type="text" className="form-input py-1.5 w-full mb-3 sm:mb-0 sm:mr-2 rounded-full bg-slate-800/30 border-slate-700" placeholder="Wallet Address" aria-label="Wallet Address" value={address || ""} readOnly={address !== null} />
-                    {
-                        (connectedAddress && connectedAddress != "") ? <Button disabled>Get Score</Button> : <Button type="submit" isLoading={checking} disabled={checking}>Get Score</Button>
-                    }
+                    <input type="text" className="form-input py-1.5 w-full mb-3 sm:mb-0 sm:mr-2 rounded-full bg-slate-800/30 border-slate-700" placeholder="Wallet Address" aria-label="Wallet Address" value={address} onChange={(e) => setAddress(e.target.value)} />
+                    <Button type="submit" isLoading={checking} disabled={checking}>Get Score</Button>
                 </div>
                 <Message message={message} setMessage={setMessage} />
             </form>

@@ -12,8 +12,8 @@ const ScoreBar = ({ score }: { score: ITrustScore }) => {
             </div>
             <div className="flex items-center gap-1">
                 <div className="w-[30%] h-2 rounded-lg bg-red-600"></div>
-                <div className="w-[35%] h-2 rounded-lg bg-yellow-500"></div>
-                <div className="w-[35%] h-2 rounded-lg bg-green-600"></div>
+                <div className="w-[50%] h-2 rounded-lg bg-yellow-500"></div>
+                <div className="w-[20%] h-2 rounded-lg bg-green-600"></div>
             </div>
             
         </div>
