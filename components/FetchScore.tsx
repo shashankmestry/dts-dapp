@@ -52,6 +52,29 @@ const FetchScore = ({ connectedAddress }: { connectedAddress?: string | null }) 
                 },
             });
             const data = await res.json();
+            console.log(data);
+            if(data.total) {
+                return data
+            } else {
+                return await refresh(address);
+            }
+        } catch (error) {
+            return false
+        }
+    }
+
+    const refresh = async (address: string) => {
+        try {
+            const res = await fetch(`/api/score/?address=${address}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ address }),
+            });
+
+            const data = await res.json();
+            console.log(data);
             if(data.total) {
                 return data;
             } else {

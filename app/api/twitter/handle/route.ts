@@ -18,7 +18,6 @@ export async function GET(request: NextRequest) {
     }
 
     const account = await AccountsModel.findOne({ address });
-    console.log(account)
     if(account) {
         return NextResponse.json({ address, handle: account.twitterHandle })
     } else {
@@ -45,7 +44,7 @@ export async function POST(request: NextRequest) {
     );
 
     if(account) {
-        return NextResponse.json(account)
+        return NextResponse.json(scoreDetails)
     } else {
         return NextResponse.json({ message: "Error with updating account" }, { status: 400 })
     }

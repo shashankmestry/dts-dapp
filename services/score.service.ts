@@ -106,6 +106,7 @@ export const refreshTrustScore = async(address: string) => {
 
 export const getTrustScore = async (address: string) => {
     const scoreDetails = {
+        address: address,
         transactionCount: 0,
         transactionsValue: 0,
         ens: "",
@@ -120,13 +121,13 @@ export const getTrustScore = async (address: string) => {
             getTransactionsValue(alchemy, address),
             getENS(alchemy, address),
             getNFTCount(alchemy, address),
-            getTwitterHandle(address)
+            // getTwitterHandle(address)
         ]);
         scoreDetails.transactionCount = results[0];
         scoreDetails.transactionsValue = results[1];
         scoreDetails.ens = results[2];
         scoreDetails.nftCount = results[3];
-        scoreDetails.twitterHandle = results[4];
+        // scoreDetails.twitterHandle = results[4];
         if (scoreDetails.transactionCount >= 20) {
             scoreDetails.total += 20;
         }
