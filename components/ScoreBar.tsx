@@ -4,8 +4,8 @@ import { TiLocation } from "react-icons/ti";
 const ScoreBar = ({ score }: { score: ITrustScore }) => {
     return (
         <div className="relative overflow-hidden">
-            <div className="flex items-center gap-1">
-                <div style={{'width': `${score.total}%`}} className="flex justify-end text-xl">
+            <div className="flex items-center">
+                <div style={{'width': `${score.total > 0 ? score.total : 10 }%`}} className="flex justify-end text-xl">
                     <TiLocation className="" />
                 </div>
                 <div className={`w-[${100 - score.total}%] h2 bg-gray-400 text-center`}></div>
