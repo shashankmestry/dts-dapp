@@ -67,7 +67,7 @@ const ConnectTwitter = ({ currentStep, address, connectedHandle, setConnectedHan
                 }
                 <div className="h-8"></div>
                 <div className="flex gap-4">
-                    { (connectedHandle != "" || sessionHandle != "") && <Button onClick={() => handleNext()}>Continue</Button> }
+                    { (connectedHandle != "" || sessionHandle != "") ? <Button onClick={() => handleNext()}>Continue</Button> : <Button variant="transparent" onClick={() => handleNext()}>Skip</Button> }
                     <Button variant="secondary" onClick={() => setCurrentStep("1")}>Back</Button>
                 </div>
             </Card>) : (<div>

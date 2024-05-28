@@ -1,35 +1,5 @@
 import AccountsModel from "@/models/AccountsModel";
 import { Alchemy, AssetTransfersCategory, Network } from "alchemy-sdk";
-
-// const getAlchemy = (network: string) => {
-//     if (network == 'base-sepolia') {
-//         return new Alchemy({
-//             apiKey: process.env.BASE_SEPOLIA_KEY,
-//             network: Network.BASE_SEPOLIA
-//         })
-//     } else if (network == 'arb-sepolia') {
-//         return new Alchemy({
-//             apiKey: process.env.ARB_SEPOLIA_KEY,
-//             network: Network.ARB_SEPOLIA
-//         })
-//     } else if (network == 'main') {
-//         return new Alchemy({
-//             apiKey: process.env.ETH_MAIN_KEY,
-//             network: Network.ETH_MAINNET
-//         })
-//     } else {
-//         return null;
-//     }
-// }
-
-const getAlchemy = (): Alchemy => {
-    return new Alchemy({
-        apiKey: process.env.ETH_MAIN_KEY,
-        network: Network.ETH_MAINNET,
-        url: "https://eth-mainnet.g.alchemy.com/v2/9-ALSD-Ex96wWd6trvPTubN1xj7YVKO5"
-    })
-}
-
 export interface ITrustScore {
     address?: string,
     transactionCount: number,
@@ -61,10 +31,10 @@ export const refreshTrustScore = async(address: string) => {
     }
     try {
         const results = await Promise.all([
-            getTransactionCount(alchemy, address),
-            getTransactionsValue(alchemy, address),
-            getENS(alchemy, address),
-            getNFTCount(alchemy, address),
+            getTransactionCount(address),
+            getTransactionsValue(address),
+            getENS(address),
+            getNFTCount(address),
             getTwitterHandle(address)
         ]);
         scoreDetails.transactionCount = results[0];
@@ -117,10 +87,10 @@ export const getTrustScore = async (address: string) => {
 
     try {
         const results = await Promise.all([
-            getTransactionCount(alchemy, address),
-            getTransactionsValue(alchemy, address),
-            getENS(alchemy, address),
-            getNFTCount(alchemy, address),
+            getTransactionCount(address),
+            getTransactionsValue(address),
+            getENS(address),
+            getNFTCount(address),
             // getTwitterHandle(address)
         ]);
         scoreDetails.transactionCount = results[0];
@@ -147,7 +117,7 @@ export const getTrustScore = async (address: string) => {
     return scoreDetails;
 }
 
-const getTransactionCount = async (alchemy: Alchemy, address: string) => {
+const getTransactionCount = async (address: string) => {
     try {
         const count = await alchemy.core.getTransactionCount(address)
         console.log(count)
@@ -158,7 +128,7 @@ const getTransactionCount = async (alchemy: Alchemy, address: string) => {
     }
 }
 
-const getTransactionsValue = async (alchemy: Alchemy, address: string) => {
+const getTransactionsValue = async (address: string) => {
     const target = 5;
     let total = 0;
     const response = await alchemy.core.getAssetTransfers({
@@ -177,7 +147,7 @@ const getTransactionsValue = async (alchemy: Alchemy, address: string) => {
     return total;
 }
 
-const getENS = async (alchemy: Alchemy, address: string) => {
+const getENS = async (address: string) => {
     const ensContractAddress = "0x57f1887a8BF19b14fC0dF6Fd9B2acc9Af147eA85";
     const nfts = await alchemy.nft.getNftsForOwner(address, {
         contractAddresses: [ensContractAddress],
@@ -196,27 +166,10 @@ const getENS = async (alchemy: Alchemy, address: string) => {
     }
 }
 
-const getNFTCount = async (alchemy: Alchemy, address: string) => {
+const getNFTCount = async (address: string) => {
     const nfts = await alchemy.nft.getNftsForOwner(address);
     return nfts.totalCount;
 }
-
-// export const getTwitterHandle = async (address: string) => {
-//     try {
-//         const res = await fetch(`${process.env.HOST}/api/twitter/handle/?address=${address}`, {
-//             method: 'GET',
-//             headers: {
-//                 'Content-Type': 'application/json',
-//             },
-//         });
-//         const data = await res.json();
-//         console.log(data)
-//         return data.handle;
-//     } catch (error) {
-//         console.log(error)
-//         return "";
-//     }
-// }
 
 export const getTwitterHandle = async (address: string) => {
     try {

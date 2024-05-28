@@ -6,6 +6,7 @@ import { ITrustScore } from "@/services/score.service"
 import { isAddress } from "ethers"
 import Message from "./ui/Message"
 import ScoreCard from "./ScoreCard"
+import ScoreData from "./ScoreData";
 
 const FetchScore = () => {
     const [address, setAddress] = useState("")
@@ -98,6 +99,7 @@ const FetchScore = () => {
             </form>
             {score && <div className="max-w-sm mx-auto my-10">
                 <ScoreCard score={score} />
+                <ScoreData score={score} />
             </div>
             }
         </>
