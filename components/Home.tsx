@@ -12,6 +12,7 @@ import ScoreCard from "./ScoreCard";
 import SectionHeader from "./layout/SectionHeader";
 import { BsTwitterX } from "react-icons/bs";
 import ButtonLink from "./ui/ButtonLink";
+import ScoreData from "./ScoreData";
 
 const Home = () => {
     const { address, isConnected } = useWeb3ModalAccount()
@@ -24,7 +25,6 @@ const Home = () => {
         setChecking(true)
         try {
             const data = await fetchScore(address);
-            console.log(data)
             if(data) {
                 setScore(data)
             } else {
@@ -58,7 +58,7 @@ const Home = () => {
                                 <p className="mb-4 text-sm">You can improve your score by connecting <BsTwitterX className="inline" /> account</p>
                                 <ButtonLink href="/connect">Connect <BsTwitterX className="mx-2" /> Account</ButtonLink>
                             </div> }
-
+                            <ScoreData score={score} />
                         </div>
                         }
                         { checking && <p className="mb-10">Please wait while we fetch your DTS</p> }

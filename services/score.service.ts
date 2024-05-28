@@ -120,7 +120,6 @@ export const getTrustScore = async (address: string) => {
 const getTransactionCount = async (address: string) => {
     try {
         const count = await alchemy.core.getTransactionCount(address)
-        console.log(count)
         return count;
     } catch (error) {
         console.log(error)

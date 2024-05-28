@@ -9,7 +9,6 @@ export const fetchScore = async (address: string) => {
             },
         });
         const data = await res.json();
-        console.log(data);
         if(data.total != undefined) {
             return data
         } else {
@@ -31,7 +30,6 @@ const refreshScore = async (address: string) => {
         });
 
         const data = await res.json();
-        console.log(data);
         if(data.total != undefined) {
             return data;
         } else {

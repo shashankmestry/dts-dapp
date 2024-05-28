@@ -1,12 +1,13 @@
 "use client";
 
-import { FormEvent, useCallback, useEffect, useState } from "react"
+import { FormEvent, useState } from "react"
 import Button from "./ui/Button"
 import { ITrustScore } from "@/services/score.service"
 import { isAddress } from "ethers"
 import Message from "./ui/Message"
 import ScoreCard from "./ScoreCard"
 import ScoreData from "./ScoreData";
+import { fetchScore } from "@/services/helper";
 
 const FetchScore = () => {
     const [address, setAddress] = useState("")
@@ -44,48 +45,6 @@ const FetchScore = () => {
             })
         }
         setChecking(false)
-    }
-
-    const fetchScore = async (address: string) => {
-        try {
-            const res = await fetch(`/api/score/?address=${address}`, {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            });
-            const data = await res.json();
-            console.log(data);
-            if(data.total) {
-                return data
-            } else {
-                return await refresh(address);
-            }
-        } catch (error) {
-            return false
-        }
-    }
-
-    const refresh = async (address: string) => {
-        try {
-            const res = await fetch(`/api/score/?address=${address}`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ address }),
-            });
-
-            const data = await res.json();
-            console.log(data);
-            if(data.total) {
-                return data;
-            } else {
-                return false;
-            }
-        } catch (error) {
-            return false
-        }
     }
 
     return (
