@@ -4,6 +4,7 @@ import Button from "./ui/Button"
 import Card from "./ui/Card"
 import Message from "./ui/Message"
 import ButtonLink from "./ui/ButtonLink"
+import { useRouter } from 'next/navigation'
 
 interface ConnectVerifyProps {
     address: string,
@@ -21,6 +22,7 @@ const ConnectVerify = ({ address, handle, setCurrentStep, loadConnectedHandle }:
         title: "",
         description: ""
     })
+    const router = useRouter()
 
     const verifyHandle = async (handle: string) => {
         setProcessing(true)
@@ -42,6 +44,12 @@ const ConnectVerify = ({ address, handle, setCurrentStep, loadConnectedHandle }:
                 description: "Account verified successfully.",
             })
             setSuccess(true)
+
+            const target = localStorage.getItem("connect_target");
+            if(target && target == 'participate') {
+                localStorage.removeItem("connect_target");
+                router.push("https://spad-genesis.vercel.app/participate")
+            }
         } catch (error) {
             console.log(error)
             setMessage({
